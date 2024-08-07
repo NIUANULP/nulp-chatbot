@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>NULP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/style.css') }}"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- partial:index.partial.html -->
+    <section class="msger">
+      <header class="msger-header">
+        <div class="msger-header-title">
+          <img src="/static/bot.png" alt="NULP Logo" />
+
+          <!-- Chatbot assistant name -->
+        </div>
+        <span class="msger-assistant-name">NULP Assistant</span>
+        <select name="Language" id="Language" class="language-select">
+          <option value="en">English</option>
+          <option value="hi">हिंदी</option>
+          <option value="mr">मराठी</option>
+          <option value="ta">தமிழ்</option>
+          <option value="bn">বাংলা</option>
+          <option value="gu">ગુજરાતી</option>
+          <option value="kn">ಕನ್ನಡ</option>
+          <option value="or">ଓଡ଼ିଆ</option>
+          <option value="pa">ਪੰਜਾਬੀ</option>
+          <option value="te">తెలుగు</option>
+          <option value="ur">اردو</option>
+          <!-- Add more options for other languages as needed -->
+        </select>
+      </header>
+      <main class="msger-chat">
+      <div class="msg left-msg welcome-message">
+    <div class="msg-bubble">
+        <div class="msg-info"></div>
+        <div class="msg-text">
+            Hello ✋. I’m NULP Connect’s Virtual Support. I’m here to help you.
+        </div>
+    
+</div>
+          </div>
+        </div>
+      </main>
+      <form class="msger-inputarea">
+        <input
+          type="text"
+          class="msger-input"
+          id="textInput"
+          placeholder="Ask anything"
+        />
+        <button type="submit" class="msger-send-btn">
+          <img src="/static/Vector.png" alt="Send Button" />
+        </button>
+      </form>
+    </section>
+    <!-- partial -->
+    <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    <script>
+      const msgerForm = $(".msger-inputarea");
+      const msgerInput = $(".msger-input");
+      const msgerChat = $(".msger-chat");
+      const languageSelect = $("#Language");
+
+      // Update the welcome message when language is changed
+      languageSelect.change(() => {
+    const selectedLanguage = languageSelect.val();
+    $.get("/translate_welcome_message", { lang: selectedLanguage }).done(function (data) {
+        $(".welcome-message .msg-text").text(data); // Update only the welcome message text
+    });
+});
+
+      msgerForm.on("submit", function (event) {
+        event.preventDefault();
+
+        const msgText = msgerInput.val();
+        if (!msgText) return;
+
+        appendMessage("You", "right", msgText);
+        msgerInput.val("");
+        botResponse(msgText);
+      });
+
+      function appendMessage(name, side, text) {
+        const msgHTML = `
+       <div class="msg ${side}-msg">
+          <div class="msg-bubble">
+             <div class="msg-info">
+                <div class="msg-info-name">${name}</div>
+             </div>
+             <div class="msg-text">${text}</div>
+          </div>
+       </div>
+       `;
+
+        msgerChat.append(msgHTML);
+        msgerChat.scrollTop(msgerChat.prop("scrollHeight"));
+      }
+
+      function botResponse(rawText) {
+        // Bot Response
+        $.get("/get", { msg: rawText }).done(function (data) {
+          console.log(rawText);
+          console.log(data);
+          appendMessage("NULP Assistant", "left", data);
+        });
+      }
+    </script>
+  </body>
+</html>

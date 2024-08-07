@@ -1,0 +1,2 @@
+python -m venv ~/envs/chatbotnew/
+source ~/envs/chatbotnew/bin/activate
