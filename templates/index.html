@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles/style.css') }}"
-    />
+    rel="stylesheet"
+    href="{{ url_for('static', filename='styles/style.css') | replace('static', 'chatbot/static') }}"
+  />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
@@ -16,7 +17,7 @@
     <section class="msger">
       <header class="msger-header">
         <div class="msger-header-title">
-          <img src="/static/bot.png" alt="NULP Logo" />
+          <img src="/chatbot/static/bot.png" alt="NULP Logo" />
 
           <!-- Chatbot assistant name -->
         </div>
@@ -41,7 +42,7 @@
     <div class="msg-bubble">
         <div class="msg-info"></div>
         <div class="msg-text">
-            Hello ✋. I’m NULP Connect’s Virtual Support. I’m here to help you.
+            Hello ✋. I'm NULP Connect's Virtual Support. I'm here to help you.
         </div>
     
 </div>
@@ -56,7 +57,7 @@
           placeholder="Ask anything"
         />
         <button type="submit" class="msger-send-btn">
-          <img src="/static/Vector.png" alt="Send Button" />
+          <img src="/chatbot/static/Vector.png" alt="Send Button" />
         </button>
       </form>
     </section>
@@ -105,7 +106,7 @@
 
       function botResponse(rawText) {
         // Bot Response
-        $.get("/get", { msg: rawText }).done(function (data) {
+        $.get("/chatbot/get", { msg: rawText }).done(function (data) {
           console.log(rawText);
           console.log(data);
           appendMessage("NULP Assistant", "left", data);

@@ -59,10 +59,10 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 app.static_folder = 'static'
 
-@app.route("/translate_welcome_message")
+@app.route("/chatbot/translate_welcome_message")
 def translate_welcome_message():
     selected_language = request.args.get('lang')
-    translated_message = translate_text("Hello! I'm NULP Connect’s Virtual Support. I’m here to help you.", "en", selected_language)
+    translated_message = translate_text("Hello! I'm NULP Connect's Virtual Support. I'm here to help you.", "en", selected_language)
     return translated_message
 
 # Function to detect language and translate if necessary
@@ -158,7 +158,7 @@ def chatbot_response(msg, user_lang):
         else:
             return random.choice(responses)
 
-@app.route("/get")
+@app.route("/chatbot/get")
 def get_bot_response():
     userText = request.args.get('msg')
     user_lang = langdetect.detect(userText)
@@ -168,7 +168,7 @@ def get_bot_response():
 
 @app.route('/chatbot')
 def welcome():
-    return render_template('index.html', welcome_message="Hello! I'm NULP Connect’s Virtual Support. I’m here to help you.")
+    return render_template('index.html', welcome_message="Hello! I'm NULP Connect's Virtual Support. I'm here to help you.")
 
 
 
