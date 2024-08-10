@@ -106,7 +106,7 @@
 
       function botResponse(rawText) {
         // Bot Response
-        $.get("/chatbot/get", { msg: rawText }).done(function (data) {
+        $.get("/chatbot/chatbot/get", { msg: rawText }).done(function (data) {
           console.log(rawText);
           console.log(data);
           appendMessage("NULP Assistant", "left", data);
