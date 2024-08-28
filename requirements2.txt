@@ -63,7 +63,7 @@ scipy==1.10.1
 sentence-transformers==2.2.2
 sentencepiece==0.1.98
 six==1.16.0
-sklearn==0.0.post1
+scikit-learn==1.2.2
 sympy==1.11.1
 tensorboard==2.12.1
 tensorboard-data-server==0.7.0
