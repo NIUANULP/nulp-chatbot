@@ -166,7 +166,7 @@ def get_bot_response():
     print("--------------", response_text)
     return Response(response=response_text)
 
-@app.route('/chatbot')
+@app.route('/')
 def welcome():
     return render_template('index.html', welcome_message="Hello! I'm NULP Connect's Virtual Support. I'm here to help you.")
 

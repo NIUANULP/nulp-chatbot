@@ -72,7 +72,7 @@
       // Update the welcome message when language is changed
       languageSelect.change(() => {
     const selectedLanguage = languageSelect.val();
-    $.get("/translate_welcome_message", { lang: selectedLanguage }).done(function (data) {
+    $.get("/chatbot/chatbot/translate_welcome_message", { lang: selectedLanguage }).done(function (data) {
         $(".welcome-message .msg-text").text(data); // Update only the welcome message text
     });
 });
@@ -106,7 +106,7 @@
 
       function botResponse(rawText) {
         // Bot Response
-        $.get("/chatbot/get", { msg: rawText }).done(function (data) {
+        $.get("/chatbot/chatbot/get", { msg: rawText }).done(function (data) {
           console.log(rawText);
           console.log(data);
           appendMessage("NULP Assistant", "left", data);
