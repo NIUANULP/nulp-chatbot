@@ -69,7 +69,8 @@ def translate_welcome_message():
 def detect_and_translate(msg, user_lang):
     detected_language = langdetect.detect(msg)
     # List of Indian languages along with their ISO language codes
-    supported_languages = ['as', 'bn', 'brx', 'doi', 'gu', 'hi', 'kn', 'ks', 'kok', 'mai', 'ml', 'mni', 'mr', 'ne', 'or', 'pa', 'sa', 'sat', 'sd', 'ta', 'te', 'ur']
+    # supported_languages = ['as', 'bn', 'brx', 'doi', 'gu', 'hi', 'kn', 'ks', 'kok', 'mai', 'ml', 'mni', 'mr', 'ne', 'or', 'pa', 'sa', 'sat', 'sd', 'ta', 'te', 'ur']
+    supported_languages = ['en']
     if detected_language in supported_languages:
         try:
             translator = Translator()
